@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AI Universe | Generative AI & Agentic AI</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #070b18;
+    color: white;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+nav {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    background: rgba(7,11,24,.88);
+    backdrop-filter: blur(15px);
+    padding: 15px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #28385c;
+}
+
+nav h2 {
+    background: linear-gradient(90deg,#00e5ff,#9d5cff);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+nav a {
+    color: #dce8ff;
+    text-decoration: none;
+    margin-left: 20px;
+    transition: .3s;
+}
+
+nav a:hover {
+    color: #00e5ff;
+}
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 100px 20px 40px;
+    position: relative;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(0,229,255,.18), transparent 30%),
+        radial-gradient(circle at 80% 70%, rgba(157,92,255,.2), transparent 30%);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    border: 1px solid rgba(0,229,255,.35);
+    animation: pulse 4s infinite;
+}
+
+.hero-content {
+    z-index: 2;
+    max-width: 900px;
+}
+
+.hero h1 {
+    font-size: clamp(45px, 8vw, 95px);
+    background: linear-gradient(90deg,#00e5ff,#7c5cff,#ff55d7);
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: float 4s ease-in-out infinite;
+}
+
+.hero h3 {
+    font-size: 25px;
+    margin: 20px 0;
+}
+
+.hero p {
+    color: #b8c7e8;
+    max-width: 750px;
+    margin: auto;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 13px 30px;
+    border-radius: 30px;
+    color: white;
+    text-decoration: none;
+    background: linear-gradient(90deg,#00a8ff,#8b5cf6);
+    transition: .3s;
+}
+
+.button:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 10px 35px rgba(0,229,255,.25);
+}
+
+section {
+    padding: 90px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title h2 {
+    font-size: 40px;
+}
+
+.section-title p {
+    color: #94a8cf;
+    margin-top: 10px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 25px;
+}
+
+.card {
+    background: linear-gradient(145deg,#10182d,#0b1122);
+    padding: 28px;
+    border-radius: 18px;
+    border: 1px solid #26385f;
+    transition: .35s;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    right: -30px;
+    top: -30px;
+    background: #00e5ff;
+    filter: blur(70px);
+    opacity: .18;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: #00d9ff;
+    box-shadow: 0 18px 50px rgba(0,0,0,.35);
+}
+
+.card h3 {
+    color: #61e8ff;
+    margin-bottom: 12px;
+    font-size: 23px;
+}
+
+.card p {
+    color: #b6c4df;
+}
+
+.tag {
+    display: inline-block;
+    margin-top: 15px;
+    margin-right: 5px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: #182745;
+    color: #9feeff;
+    font-size: 12px;
+}
+
+.compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.compare-box {
+    padding: 35px;
+    border-radius: 20px;
+    background: #10182c;
+    border: 1px solid #2c4069;
+}
+
+.compare-box h3 {
+    color: #00e5ff;
+    font-size: 27px;
+    margin-bottom: 20px;
+}
+
+.compare-box ul {
+    margin-left: 20px;
+    color: #b8c8e5;
+}
+
+.flow {
+    margin-top: 50px;
+    text-align: center;
+}
+
+.flow-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.flow-item {
+    background: #131f38;
+    border: 1px solid #315080;
+    padding: 18px 25px;
+    border-radius: 15px;
+    transition: .3s;
+}
+
+.flow-item:hover {
+    transform: scale(1.08);
+    border-color: #00e5ff;
+}
+
+.arrow {
+    color: #00e5ff;
+    font-size: 25px;
+}
+
+.timeline {
+    max-width: 850px;
+    margin: auto;
+}
+
+.timeline-item {
+    padding: 25px;
+    margin: 20px 0;
+    border-left: 3px solid #00e5ff;
+    background: #0e172b;
+    border-radius: 0 15px 15px 0;
+}
+
+.timeline-item h3 {
+    color: #61e8ff;
+}
+
+footer {
+    padding: 35px;
+    text-align: center;
+    background: #050914;
+    color: #7789ac;
+    border-top: 1px solid #1c2b49;
+}
+
+@keyframes float {
+    0%,100% {transform:translateY(0)}
+    50% {transform:translateY(-12px)}
+}
+
+@keyframes pulse {
+    0% {transform:scale(.8);opacity:.2}
+    50% {transform:scale(1.2);opacity:.7}
+    100% {transform:scale(.8);opacity:.2}
+}
+
+@media(max-width:800px) {
+    nav .links {
+        display:none;
+    }
+
+    .compare {
+        grid-template-columns:1fr;
+    }
+
+    section {
+        padding:70px 5%;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<nav>
+    <h2>AI Universe</h2>
+
+```
+<div class="links">
+    <a href="#ai">AI</a>
+    <a href="#tools">AI Tools</a>
+    <a href="#comparison">GenAI vs Agentic AI</a>
+    <a href="#architecture">How AI Works</a>
+</div>
+```
+
+</nav>
+
+<header class="hero">
+
+<div class="hero-content">
+
+<h1>AI UNIVERSE</h1>
+
+<h3>Understanding the Modern Artificial Intelligence Ecosystem</h3>
+
+<p>
+Explore Artificial Intelligence, Generative AI, Agentic AI,
+ChatGPT, Claude, GitHub Copilot, Codex, BharatGPT and Cursor —
+and understand how the AI revolution is changing software,
+business and everyday technology.
+</p>
+
+<a class="button" href="#ai">Explore AI</a>
+
+</div>
+</header>
+
+<section id="ai">
+
+<div class="section-title">
+<h2>What is Artificial Intelligence?</h2>
+
+<p>
+Artificial Intelligence allows computer systems to perform tasks
+that normally require human intelligence.
+</p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+<h3>Artificial Intelligence</h3>
+<p>
+AI is the broad field of creating computer systems capable of
+performing intelligent tasks such as understanding language,
+recognizing images, making predictions and solving problems.
+</p>
+
+<span class="tag">AI</span> <span class="tag">Automation</span>
+
+</div>
+
+<div class="card">
+<h3>Machine Learning</h3>
+
+<p>
+Machine Learning is a branch of AI where systems learn patterns
+from data instead of relying entirely on manually programmed rules.
+</p>
+
+<span class="tag">ML</span> <span class="tag">Data</span>
+
+</div>
+
+<div class="card">
+<h3>Deep Learning</h3>
+
+<p>
+Deep Learning uses multi-layer neural networks to learn complex
+patterns. It powers technologies such as image recognition,
+speech recognition and modern large language models.
+</p>
+
+<span class="tag">Neural Networks</span>
+
+</div>
+
+<div class="card">
+<h3>Generative AI</h3>
+
+<p>
+Generative AI creates new content such as text, code, images,
+audio and video based on patterns learned from large datasets.
+</p>
+
+<span class="tag">LLM</span> <span class="tag">Generation</span>
+
+</div>
+
+<div class="card">
+<h3>Agentic AI</h3>
+
+<p>
+Agentic AI goes beyond simply generating an answer.
+An AI agent can reason about a goal, plan steps, use available
+tools, perform actions and evaluate the results.
+</p>
+
+<span class="tag">Agents</span> <span class="tag">Tools</span> <span class="tag">Automation</span>
+
+</div>
+
+<div class="card">
+<h3>Large Language Models</h3>
+
+<p>
+LLMs are AI models trained on very large amounts of text and
+other data. They can understand prompts and generate useful
+natural-language or code responses.
+</p>
+
+<span class="tag">LLM</span> <span class="tag">NLP</span>
+
+</div>
+
+</div>
+</section>
+
+<section id="tools">
+
+<div class="section-title">
+<h2>Major AI Platforms & Tools</h2>
+
+<p>
+Some of the important AI assistants and development tools
+used in today's AI ecosystem.
+</p>
+</div>
+
+<div class="grid">
+
+<div class="card">
+
+<h3>ChatGPT</h3>
+
+<p>
+ChatGPT is an AI assistant from OpenAI. It can help with
+conversation, writing, programming, research, reasoning,
+data analysis and many other knowledge tasks.
+</p>
+
+<span class="tag">OpenAI</span> <span class="tag">AI Assistant</span>
+
+</div>
+
+<div class="card">
+
+<h3>Claude</h3>
+
+<p>
+Claude is an AI assistant developed by Anthropic.
+It is designed for tasks such as reasoning, writing,
+document analysis, coding and working with large amounts
+of information.
+</p>
+
+<span class="tag">Anthropic</span> <span class="tag">LLM</span>
+
+</div>
+
+<div class="card">
+
+<h3>GitHub Copilot</h3>
+
+<p>
+GitHub Copilot is an AI coding assistant designed to help
+developers write, understand and improve software directly
+within development workflows and supported IDEs.
+</p>
+
+<span class="tag">Coding</span> <span class="tag">GitHub</span>
+
+</div>
+
+<div class="card">
+
+<h3>OpenAI Codex</h3>
+
+<p>
+Codex is OpenAI's coding-focused AI technology and agent
+experience for software development tasks. It can assist with
+understanding repositories, generating code, modifying software
+and completing development tasks.
+</p>
+
+<span class="tag">OpenAI</span> <span class="tag">Coding Agent</span>
+
+</div>
+
+<div class="card">
+
+<h3>BharatGPT</h3>
+
+<p>
+BharatGPT refers to initiatives focused on building AI and
+language technologies for India, particularly around Indian
+languages and locally relevant AI applications.
+</p>
+
+<span class="tag">India</span> <span class="tag">Multilingual AI</span>
+
+</div>
+
+<div class="card">
+
+<h3>Cursor</h3>
+
+<p>
+Cursor is an AI-focused code editor that integrates AI assistance
+into software development. Developers can use it to understand
+codebases, generate code, edit files and work with AI during
+development.
+</p>
+
+<span class="tag">AI IDE</span> <span class="tag">Developer Tool</span>
+
+</div>
+
+</div>
+</section>
+
+<section id="comparison">
+
+<div class="section-title">
+
+<h2>Generative AI vs Agentic AI</h2>
+
+<p>
+The difference becomes easier when we look at what happens
+after you give the AI a request.
+</p>
+
+</div>
+
+<div class="compare">
+
+<div class="compare-box">
+
+<h3>Generative AI</h3>
+
+<ul>
+<li>User provides a prompt.</li>
+<li>AI understands the request.</li>
+<li>AI generates content.</li>
+<li>Output may be text, code, images, audio or other content.</li>
+<li>The user normally decides what to do with the generated result.</li>
+</ul>
+
+<div class="flow-row">
+
+<div class="flow-item">Prompt</div>
+<div class="arrow">→</div>
+<div class="flow-item">AI Model</div>
+<div class="arrow">→</div>
+<div class="flow-item">Generated Output</div>
+
+</div>
+
+</div>
+
+<div class="compare-box">
+
+<h3>Agentic AI</h3>
+
+<ul>
+<li>User provides a goal.</li>
+<li>AI analyzes the objective.</li>
+<li>AI can create a plan.</li>
+<li>AI can use available tools.</li>
+<li>AI can execute multiple steps.</li>
+<li>AI can inspect results and continue toward the goal.</li>
+</ul>
+
+<div class="flow-row">
+
+<div class="flow-item">Goal</div>
+<div class="arrow">→</div>
+<div class="flow-item">Plan</div>
+<div class="arrow">→</div>
+<div class="flow-item">Tools</div>
+<div class="arrow">→</div>
+<div class="flow-item">Action</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="flow">
+
+<h2>Simple Example</h2>
+
+<div class="flow-row">
+
+<div class="flow-item">
+Generative AI<br>
+"Write Python code"
+</div>
+
+<div class="arrow">→</div>
+
+<div class="flow-item">
+Generates Code
+</div>
+
+</div>
+
+<div class="flow-row">
+
+<div class="flow-item">
+Agentic AI<br>
+"Fix my application"
+</div>
+
+<div class="arrow">→</div>
+
+<div class="flow-item">
+Inspect Project
+</div>
+
+<div class="arrow">→</div>
+
+<div class="flow-item">
+Find Problem
+</div>
+
+<div class="arrow">→</div>
+
+<div class="flow-item">
+Modify Code
+</div>
+
+<div class="arrow">→</div>
+
+<div class="flow-item">
+Test Result
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="architecture">
+
+<div class="section-title">
+
+<h2>How Modern AI Works</h2>
+
+<p>
+A simplified view of the journey from data to an AI-powered application.
+</p>
+
+</div>
+
+<div class="flow-row">
+
+<div class="flow-item">Training Data</div>
+
+<div class="arrow">→</div>
+
+<div class="flow-item">Machine Learning</div>
+
+<div class="arrow">→</div>
+
+<div class="flow-item">Neural Networks</div>
+
+<div class="arrow">→</div>
+
+<div class="flow-item">AI Model</div>
+
+<div class="arrow">→</div>
+
+<div class="flow-item">AI Application</div>
+
+</div>
+
+<div class="section-title" style="margin-top:90px">
+
+<h2>Evolution of AI Applications</h2>
+
+</div>
+
+<div class="timeline">
+
+<div class="timeline-item">
+
+<h3>Traditional Software</h3>
+
+<p>
+Developers explicitly program rules that determine how
+the application behaves.
+</p>
+
+</div>
+
+<div class="timeline-item">
+
+<h3>Machine Learning</h3>
+
+<p>
+Systems learn patterns from datasets and use those patterns
+to make classifications or predictions.
+</p>
+
+</div>
+
+<div class="timeline-item">
+
+<h3>Generative AI</h3>
+
+<p>
+Models generate new text, software code, images,
+audio and other forms of content.
+</p>
+
+</div>
+
+<div class="timeline-item">
+
+<h3>Agentic AI</h3>
+
+<p>
+AI systems increasingly combine models with tools,
+memory, planning and actions to accomplish larger goals.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<h3>AI Universe</h3>
+
+<p>
+Artificial Intelligence • Generative AI • Agentic AI • AI Development
+</p>
+
+<p style="margin-top:10px">
+Built using HTML & CSS and ready for cloud deployment.
+</p>
+
+</footer>
+
+</body>
+</html>
